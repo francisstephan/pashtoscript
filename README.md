@@ -16,7 +16,7 @@ Use live at http://www.eludev.fr/pashto
 
 ## Comment
 
-A scalajs, sclajs-react port from clojurescript, reagent (see https://github.com/francisstephan/farsiscript)
+A scalajs, scalajs-react port from clojurescript, reagent (see https://github.com/francisstephan/farsiscript)
 
 ## References
 
