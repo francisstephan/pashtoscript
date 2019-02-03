@@ -1,0 +1,9 @@
+/project/target
+/target
+/project/project
+/index-dev.html
+/diff
+*.jar
+*.class
+/public
+/src/test
