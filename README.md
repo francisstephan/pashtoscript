@@ -22,7 +22,7 @@ A scalajs, scalajs-react port from clojurescript, reagent (see https://github.co
 
 Uses scalajs-react from https://github.com/japgolly/scalajs-react/blob/master/doc/VDOM.md
 
-Uses Atom from https://github.com/martintrojer/atom-scala
+No use for state in CharTrans any longer : to be able to consult previous character while parsing a string, just zip the string with a right shift of itself.
 
 ## License
 

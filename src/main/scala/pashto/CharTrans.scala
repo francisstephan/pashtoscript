@@ -1,16 +1,12 @@
 package pashto
 
-import atom._
-
-// https://github.com/martintrojer/atom-scala
-
 object Translator{
   val latPax = Map("&" -> "\u0621", // hamza
                     "a" -> "\u0623", // a hamza
                      "i" -> "\u0626", // i hamza
                     "u" -> "\u0624", // u hamza
                     "e" -> "\u06c0", // e yé domboridé
-                    "'" -> "\u0627", // alif
+                    "\"" -> "\u0627", // alif
                     "b" -> "\u0628", // ba
                     "p" -> "\u067E", // pa
                     "t" -> "\u062A", // ta
@@ -40,29 +36,29 @@ object Translator{
                     "?" -> "\u061F",
                     "," -> "\u060C",
                     "." -> ".",
+                    "_" -> "", // filter _
                     "$" -> "\u0651", // shadda
-                     "_" -> "", // filter "_"
                     "0" -> "\u06F0", "1" -> "\u06F1", "2" -> "\u06F2","3" -> "\u06F3", "4" -> "\u06F4", // numbers should remain at
                     "5" -> "\u06F5", "6" -> "\u06F6", "7" -> "\u06F7","8" -> "\u06F8", "9" -> "\u06F9" ) // the end of the map
 
 
   val latPax_ = Map("a" -> "\u0622","e" -> "\u0629", "i" -> "إ", "t" -> "\u062b", "d" -> "\u0630", "r" ->  "\u0698" , "s" -> "\u0634", "g" -> "\u063a", "y" -> "\u0649", "j" -> "ژ", "T" -> "\u067C",
      "z" -> "\u0681","c" -> "\u0685","D" -> "\u0689" ,"r" -> "\u0693" , "S" -> "\u069A", "E" -> "\u06D0",
-     "Y" -> "\u06CD" , "R" -> "\u0696", "N" -> "\u06BC" ,"_" -> "" ) // filter "_"
-
-  val lastcar = Atom("")
+     "Y" -> "\u06CD" , "R" -> "\u0696", "N" -> "\u06BC", "_" -> "" ) // filter _
 
   def subst(car: String, carte: Map[String, String]) = carte.getOrElse(car,car)
 
-  def subst_(car: String) = {
-    val prec = lastcar.get();
-    lastcar.reset(car)
-    if(prec == "_") subst(car, latPax_) else subst(car, latPax)
+  def subst_(dble:(Char,Char)) = {
+    val carac = dble._1.toString()
+    if(dble._2 == '_') subst(carac, latPax_) else subst(carac, latPax)
   }
-  def tos(car: Char):String = subst_(car.toString())
+  def szip(s:String) = {
+    val ls = s.toList;
+    ls zip ('&'::ls)
+  }
+
   def transl(s: String): String = {
-    lastcar.reset("")
-    s.map(tos).foldLeft("")(_+_)
+    szip(s).map(subst_).foldLeft("")(_+_)
   }
 
 }
